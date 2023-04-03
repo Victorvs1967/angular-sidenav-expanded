@@ -1,0 +1,44 @@
+<mat-toolbar color="primary">
+  <div class="brand">
+    <button mat-icon-button type="menu" (click)="sidenav.toggle()"><mat-icon class="mat-18">menu</mat-icon></button>
+    <span>Application</span>
+  </div>
+  <button mat-icon-button type="menu" [mat-menu-trigger-for]="menu"><mat-icon class="mat-18">more_vert</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="isLogin = !isLogin">
+      <mat-icon class="mat-18">{{ isLogin ? 'logout' : 'login' }}</mat-icon>{{ isLogin ? 'Logout' : 'Login' }}
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<mat-sidenav-container autosize>
+  <mat-sidenav #sidenav mode="side" opened>
+    <mat-nav-list role="list">
+      <mat-list-item role="listItem">
+        <div class="sidenav-item">
+          <mat-icon class="sidenav-btn" [ngClass]="{ 'rotated': !isExpand }" (click)="isExpand = !isExpand">chevron_left</mat-icon>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listItem" routerLink="dashboard">
+        <div class="sidenav-item">
+          <mat-icon>home</mat-icon>
+          <span *ngIf="isExpand">Dashboard</span>
+          </div>
+      </mat-list-item>
+      <mat-list-item role="listItem" routerLink="user">
+        <div class="sidenav-item">
+          <mat-icon>person</mat-icon>
+          <span *ngIf="isExpand">User</span>
+        </div>
+      </mat-list-item>
+      <mat-list-item role="listItem" routerLink="info">
+        <div class="sidenav-item">
+          <mat-icon>info</mat-icon>
+          <span *ngIf="isExpand">Info</span>
+        </div>
+    </mat-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
+</mat-sidenav-container>
